@@ -40,3 +40,26 @@ function limparFormulario() {
   document.getElementById('description').value = '';
   document.getElementById('amount').value = '';
 }
+
+
+function obterPlanilhas() {
+  const query = "SELECT "
+  consultaBanco(query);
+}
+
+async function consultaBanco(caminho, metodo) {
+  return await fetch(`${caminho}`, {
+    method: `${metodo}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (resposta) {
+      if (resposta.ok) {
+        return resposta.json();
+      }
+    })
+    .catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+}
