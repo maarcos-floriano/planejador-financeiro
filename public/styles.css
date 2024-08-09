@@ -21,6 +21,8 @@ h1, h2 {
 
 form {
   margin-bottom: 20px;
+  display: flex;
+  flex-flow: column;
 }
 
 label {
@@ -28,15 +30,49 @@ label {
   justify-content: space-between;
   align-items: center;
 
+  position: relative;
+
   margin-bottom: 5px;
 }
 
 input {
   width: 80%;
   padding: 8px;
-  margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+input::-webkit-inner-spin-button {
+  appearance: none
+}
+
+.suggestion {
+  display: none;
+  width: 85%;
+
+  background-color: #ddd;
+  border-radius: 4px;
+
+  position: absolute;
+  top: 35px;
+  right: -5px;
+
+  z-index: 1;
+}
+
+.suggestion p {
+  width: 97%;
+  padding: 5px;
+  margin: 5px auto;
+
+  border-radius: 4px;
+
+  transition: 0.4s ease all;
+}
+
+.suggestion p:hover {
+  background-color: #fff;
+  cursor: pointer;
 }
 
 .container-bttns {
@@ -44,6 +80,8 @@ input {
   align-items: center;
   justify-content: end;
   gap: 10px;
+
+  margin-top: 10px;
 }
 
 button {
@@ -71,4 +109,25 @@ button.expense {
 .entries li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
+}
+
+.areaResults {
+  display: flex;
+  margin: auto;
+
+  gap: 20px;
+
+  width: 95%;
+  padding: 10px;
+
+  overflow-x: scroll;
+}
+
+.card {
+  padding: 10px;
+  height: 100px;
+
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
