@@ -1,3 +1,6 @@
+const category = document.getElementById("category");
+const suggestions = document.getElementById("suggestion");
+
 document.getElementById('finance-form').addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -42,13 +45,27 @@ function limparFormulario() {
 }
 
 
-function obterPlanilhas() {
-  const query = "SELECT "
-  consultaBanco(query);
+async function obterPlanilhas() {
+  const query = "SELECT * FROM registro_financeiro";
+  const method = "GET";
+  const result = await consultaBanco(query, method);
+  console.log(result);
+  createSpreadSheet(result)
 }
 
+function createSpreadSheet(objets) {
+  const areaResults = document.getElementById("areaResults");
+
+  for (const obj of objets) {
+    console.log(obj);
+    areaResults.innerHTML += `<div class="card"><p>${obj.categoria}</p><p>${obj.item}</p><p>${obj.valor}</p></div>`
+  }
+}
+
+obterPlanilhas();
+
 async function consultaBanco(caminho, metodo) {
-  return await fetch(`${caminho}`, {
+  return fetch(`http://localhost:3000/connect/${caminho}`, {
     method: `${metodo}`,
     headers: {
       "Content-Type": "application/json",
