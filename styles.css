@@ -6,6 +6,7 @@ body {
 }
 
 .container {
+  width: 80%;
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
@@ -23,16 +24,26 @@ form {
 }
 
 label {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   margin-bottom: 5px;
 }
 
-input, select {
-  width: 100%;
+input {
+  width: 80%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.container-bttns {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
 }
 
 button {

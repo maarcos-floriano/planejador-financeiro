@@ -10,24 +10,33 @@
     <div class="container">
         <h1>Planejador Financeiro</h1>
         <form id="finance-form">
-            <label for="description">Descrição:</label>
-            <input type="text" id="description" required>
-            <label for="amount">Valor:</label>
-            <input type="number" id="amount" required>
+            <label for="category">Categoria
+                <input type="text" id="category" placeholder="Ex: Receita" required>
+            </label>
 
-            <button type="submit" value="income" class="income">Receita</button>
-            <button type="submit" value="expense" class="expense">Despesa</button>
+            <label for="item">Item
+                <input type="text" id="item" placeholder="Ex: Salário" required>
+            </label>
+            
+            <label for="value">Valor
+                <input type="number" id="value" placeholder="R$ 0,00" required>
+            </label>
+            
+            <div class="container-bttns">
+                <button type="submit" value="income" class="income">Receita</button>
+                <button type="submit" value="expense" class="expense">Despesa</button>
+            </div>
         </form>
-        <div class="summary">
+        <!-- <div class="summary">
             <h2>Resumo</h2>
             <p><strong>Receitas:</strong> <span id="total-income">0</span></p>
             <p><strong>Despesas:</strong> <span id="total-expenses">0</span></p>
             <p><strong>Saldo:</strong> <span id="balance">0</span></p>
-        </div>
-        <div class="entries">
+        </div> -->
+        <!-- <div class="entries">
             <h2>Entradas</h2>
             <ul id="entries-list"></ul>
-        </div>
+        </div> -->
     </div>
     <script src="script.js"></script>
 </body>
