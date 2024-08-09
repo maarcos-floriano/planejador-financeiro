@@ -13,6 +13,7 @@ CREATE TABLE registro_financeiro (
     categoria VARCHAR(255) NOT NULL,
     item VARCHAR(255) NOT NULL,
     valor DECIMAL(10, 2) NOT NULL,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     fkUser INT NOT NULL,
     FOREIGN KEY (fkUser) REFERENCES usuarios(id)
 );

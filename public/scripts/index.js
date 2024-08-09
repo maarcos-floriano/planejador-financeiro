@@ -58,7 +58,8 @@ function createSpreadSheet(objets) {
 
   for (const obj of objets) {
     console.log(obj);
-    areaResults.innerHTML += `<div class="card"><p>${obj.categoria}</p><p>${obj.item}</p><p>${obj.valor}</p></div>`
+    const classColor = obj.categoria.toLowerCase(); 
+    areaResults.innerHTML += `<div onclick="editar(this)" class="card"><p class="tag ${classColor}" >${obj.categoria}</p><p>Item: ${obj.item}</p><p>Valor ${obj.valor}</p></div>`
   }
 }
 
