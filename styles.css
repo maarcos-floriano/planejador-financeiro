@@ -36,7 +36,7 @@ input, select {
 }
 
 button {
-  background-color: #28a745;
+  background-color: #218838;
   color: #fff;
   padding: 10px;
   border: none;
@@ -44,8 +44,8 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #218838;
+button.expense {
+  background-color: #ce2d05;
 }
 
 .summary {
