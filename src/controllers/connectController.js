@@ -7,6 +7,7 @@ function conexao(req, res){
     res.json(resultados);
   })
   .catch(function(erro){
+    console.log("[ERRO] erro ao executar o comando::"+ erro);
     res.status(500).json(erro.sqlMessage);
   });
 }
