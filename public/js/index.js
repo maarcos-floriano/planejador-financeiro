@@ -1,5 +1,5 @@
 const ctx = document.getElementById("chart");
-let idCard;
+let idCard = null;
 
 let mainChart = new Chart(ctx,  {
   type: 'bar',
@@ -44,7 +44,7 @@ async function registra(event) {
   let query;
   let method;
 
-  if (id == undefined) {
+  if (id == null) {
     query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
     method = "POST";
   } else {
@@ -55,6 +55,10 @@ async function registra(event) {
   event.target[1].value = ""
   
   const result = await consultaBanco(query, method);
+  
+  console.log("result");
+  console.log(result);
+
   obterPlanilhas();
   updateChart()
 }
@@ -136,6 +140,7 @@ async function deletar(event) {
   const method = 'DELETE';
 
   const result = await consultaBanco(query, method);  
+  idCard = null;
   obterPlanilhas();
   updateChart()
 }
