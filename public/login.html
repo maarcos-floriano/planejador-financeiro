@@ -41,7 +41,7 @@
     const ra = document.querySelector('#ra').value;
     const password = document.querySelector('#password').value;
     if (ra !== '' && password !== '') {
-      consultaBanco(`select * from usuarios where ra = '${ra}' AND senha = '${password}'`, 'GET').then((resposta) => {
+      consultaBanco(`SELECT * FROM usuario WHERE ra = '${ra}' AND senha = '${password}'`, 'GET').then((resposta) => {
         if (resposta) {
           id = resposta[0].id;
           sessionStorage.setItem('id', id);

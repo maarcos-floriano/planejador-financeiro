@@ -1,9 +1,10 @@
 var mysql = require('mysql2');
+require('dotenv').config()
 
 var msqlConfig = {
   host: 'localhost',
-  user: 'aluno',
-  password: 'sptech',
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
   database: 'planilha_sptech'
 }
 

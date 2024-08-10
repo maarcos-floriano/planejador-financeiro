@@ -15,6 +15,11 @@ section {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   
   border-radius: 8px;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: 2s ease all;
 }
 
 .container {
@@ -146,7 +151,29 @@ b.despesa {
 }
 
 .charts {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+
   width: 50%;
   height: 95%;
   /* background-color: #ddd; */
+}
+
+.init-window {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: white;
+
+  z-index: -1;
+
+  position: absolute;
+  top: 0;
+
+  transition: 2.5s ease all;
 }

@@ -26,6 +26,7 @@ let mainChart = new Chart(ctx,  {
 });
 
 async function registra(event) {
+  event.preventDefault();
   const valorBttn = event.submitter.value;
   let categoria;
 
@@ -40,8 +41,13 @@ async function registra(event) {
 
   const query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
   const method = "POST";
+
+  event.target[0].value = ""
+  event.target[1].value = ""
   
   const result = await consultaBanco(query, method);
+  obterPlanilhas();
+  updateChart()
 }
 
 async function obterPlanilhas() {
@@ -118,4 +124,20 @@ async function consultaBanco(caminho, metodo) {
     .catch(function (resposta) {
       console.log(`#ERRO: ${resposta}`);
     });
+}
+
+const initWindow = document.createElement('div');
+initWindow.id = "initWindow";
+initWindow.classList = "init-window";
+initWindow.innerHTML = `<img src="https://moodle.sptech.school/pluginfile.php/1/core_admin/logo/0x200/1692971033/sptech_principal_ciano.png" alt="SPTech - São Paulo Tech School"></img>`;
+document.body.appendChild(initWindow);
+
+window.onload = () => {
+  const time = setTimeout(() => {
+    document.getElementById("initWindow").style.opacity = 0;
+    document.querySelectorAll("section").forEach(section => {
+      section.style.visibility = "visible";
+      section.style.opacity = 1;
+    });
+  }, 2500);
 }
