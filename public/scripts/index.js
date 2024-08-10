@@ -5,6 +5,7 @@ let mainChart = new Chart(ctx,  {
   data: {
     labels: [],
       datasets: [{
+        type: 'bar',
         label: 'Informações sobre sua receita',
         data: [],
         borderWidth: 1,
