@@ -1,3 +1,7 @@
+if (!sessionStorage.getItem("id")) {
+  window.location.href = "/login";
+}
+
 const ctx = document.getElementById("chart");
 let idCard;
 
