@@ -64,6 +64,21 @@ main{
   height: 100%;
 }
 
+.btn-acessar{
+  width: 90%;
+  height: 40px;
+  background-color: #000428;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-acessar:hover{
+  color: blue;
+}
+
 form{
   display: flex;
   flex-direction: column;
