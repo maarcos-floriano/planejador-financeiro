@@ -86,10 +86,17 @@ async function updateChart() {
     SELECT receita.total receita, despesa.total despesa, (receita.total - despesa.total) total 
     FROM 
       (SELECT COALESCE(SUM(valor), 0) AS total 
-      FROM registro_financeiro where categoria = "Despesa") AS despesa, 
-      (SELECT COALESCE(SUM(valor), 0) AS total 
-      FROM registro_financeiro WHERE categoria = "Receita") AS receita
-    `;
+      FROM registro_financeiro 
+      WHERE categoria = "Despesa" 
+      AND MONTH(data) = MONTH(curdate()) 
+      AND YEAR(data) = YEAR(curdate())) AS despesa, 
+      (Select COALESCE(SUM(valor), 0) AS total 
+      FROM registro_financeiro 
+      WHERE categoria = "Receita" 
+      AND MONTH(data) = MONTH(curdate()) 
+      AND YEAR(data) = YEAR(curdate())) AS receita;
+    `
+    ;
   const method = "GET";
   const result = await consultaBanco(query, method);
   const labels = Object.keys(result[0]);
