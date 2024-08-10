@@ -39,7 +39,9 @@ async function registra(event) {
     categoria = "Despesa";
   }
 
-  const query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
+  // if (event.)
+
+  const query = `INSERT INTO registro_financeiro (id, categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
   const method = "POST";
 
   event.target[0].value = ""
@@ -66,7 +68,7 @@ function createSpreadSheet(objets) {
 
     const classColor = obj.categoria.toLowerCase(); 
     listCard.innerHTML += `
-    <div onclick="editar(this)" class="card">
+    <div onclick="editar(this)" id="card_${obj.id}" class="card">
       <div class="info-card">
         <b class="tag ${classColor}" >
           ${obj.categoria}
@@ -107,6 +109,18 @@ async function updateChart() {
   mainChart.update();
 }
 
+function editar(event) {
+  const card = event.currentTarget;
+  const valores = card.querySelectorAll('.card > p');
+
+  const item = valores[0].innerHTML;
+  const valor = valores[1].innerHTML;
+
+  document.getElementById("item").value = item; 
+  document.getElementById("value").value = valor;
+
+
+} 
 
 obterPlanilhas();
 updateChart();
