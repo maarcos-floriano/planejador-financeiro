@@ -74,15 +74,8 @@ async function registra(event) {
   event.target[0].value = "";
   event.target[1].value = "";
 
-
-  console.log(query);
-  console.log(method);
-
   const result = await consultaBanco(query, method);
   
-  console.log("result");
-  console.log(result);
-
   obterPlanilhas();
   updateChart();
   resetInactivityTimer();
