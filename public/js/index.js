@@ -85,7 +85,7 @@ async function registra(event) {
 }
 
 async function obterPlanilhas() {
-  const query = "SELECT * FROM registro_financeiro ORDER BY data DESC";
+  const query = `SELECT * FROM registro_financeiro WHERE fkUser = ${sessionStorage.getItem("id")} ORDER BY data DESC`;
   const method = "GET";
   const result = await consultaBanco(query, method);
   createSpreadSheet(result);
