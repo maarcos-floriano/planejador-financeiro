@@ -15,7 +15,7 @@ function resetInactivityTimer() {
 
 function logout() {
   localStorage.removeItem("password");
-  window.location.href = "/login.html"; // Redirecionar para a página de login
+  window.location.href = "/index.html"; // Redirecionar para a página de login
 }
 
 const ctx = document.getElementById("chart");
@@ -129,6 +129,8 @@ async function updateChart() {
     `;
   const method = "GET";
   const result = await consultaBanco(query, method);
+
+  console.log(result);
   const labels = Object.keys(result[0]);
   const data = Object.values(result[0]).map((val) => Number.parseInt(val));
 
