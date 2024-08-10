@@ -191,3 +191,25 @@ b.despesa {
 
   transition: 2.5s ease all;
 }
+
+@media screen and (max-width: 768px) {
+
+  body, html {
+    overflow: hidden;
+  }
+
+  .areaResults {
+    flex-flow: column;
+  }
+
+  .list-card {
+    width: 100%;
+    height: 50%;
+  }
+
+  .charts {
+    width: 100%;
+    height: 50%;
+  }
+  
+}
