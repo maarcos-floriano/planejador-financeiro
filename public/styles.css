@@ -97,7 +97,7 @@ button.expense {
   justify-content: space-around;
 
   width: 95%;
-  max-width: 700px;
+  max-width: 1000px;
   height: 50%;
 }
 
@@ -132,7 +132,7 @@ b.tag {
 }
 
 b.receita {
-  background-color: #218837d8;
+  background-color: #218837;
 }
 
 b.despesa {
@@ -145,8 +145,8 @@ b.despesa {
   width: 95%;
 }
 
-.grafics {
+.charts {
   width: 50%;
   height: 95%;
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }

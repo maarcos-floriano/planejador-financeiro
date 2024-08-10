@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planejador Financeiro</title>
     <link rel="stylesheet" href="styles.css">
+
+    <script 
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js">
+    </script>
 </head>
 <body>
     <section class="container">
@@ -15,7 +19,7 @@
             </label>
             
             <label for="value">Valor
-                <input type="number" id="value" placeholder="R$ 0,00" required>
+                <input type="number" id="value" placeholder="R$ 0,00" step="0.01" required>
             </label>
             
             <div class="container-bttns">
@@ -28,8 +32,8 @@
         <div class="list-card" id="listCard">
 
         </div>
-        <div class="grafics">
-            
+        <div class="charts">
+            <canvas id="chart"></canvas>
         </div>
     </section>
     <script src="./scripts/index.js"></script>
