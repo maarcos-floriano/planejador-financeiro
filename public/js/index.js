@@ -120,15 +120,15 @@ async function updateChart() {
       FROM registro_financeiro 
       WHERE categoria = 'Despesa' 
       AND fkUser = ${sessionStorage.getItem('id')}
-      AND MONTH(data) = MONTH(curdate()) 
-      AND YEAR(data) = YEAR(curdate())) AS despesa, 
-      (Select COALESCE(SUM(valor), 0) AS total 
+      AND EXTRACT(MONTH FROM data) = EXTRACT(MONTH FROM CURRENT_DATE)
+      AND EXTRACT(YEAR FROM data) = EXTRACT(YEAR FROM CURRENT_DATE)) AS despesa, 
+      (SELECT COALESCE(SUM(valor), 0) AS total 
       FROM registro_financeiro 
       WHERE categoria = 'Receita' 
       AND fkUser = ${sessionStorage.getItem('id')}
-      AND MONTH(data) = MONTH(curdate()) 
-      AND YEAR(data) = YEAR(curdate())) AS receita;
-    `;
+      AND EXTRACT(MONTH FROM data) = EXTRACT(MONTH FROM CURRENT_DATE)
+      AND EXTRACT(YEAR FROM data) = EXTRACT(YEAR FROM CURRENT_DATE)) AS receita
+   `;
   const method = "GET";
   const result = await consultaBanco(query, method);
 
