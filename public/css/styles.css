@@ -1,16 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Exo 2', sans-serif;
+  background-image: linear-gradient(to right, #161A24, #1F2A44);
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
 }
 
 section {
   background: #fff;
 
-  margin: 20px auto;
+  /* margin: 20px auto; */
   
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   
@@ -24,7 +31,8 @@ section {
 
 .container {
   width: 80%;
-  max-width: 600px;
+  /* max-width: 600px; */
+  max-width: 1000px;
 
   padding: 20px;
 }
@@ -101,14 +109,17 @@ button.expense {
   align-items: center;
   justify-content: space-around;
 
-  width: 95%;
+  width: 80%;
   max-width: 1000px;
   height: 50%;
+  padding: 20px;
 }
 
 .list-card {
   width: 40%;
   height: 95%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .card {
@@ -120,9 +131,12 @@ button.expense {
   padding: 5px 10px;
   height: 100px;
 
-  border-radius: 10px;
+  /* border-radius: 10px; */
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  border-top: 1px solid #ddd;
+
+  cursor: pointer;
 }
 
 .card p {

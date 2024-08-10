@@ -1,4 +1,5 @@
 const ctx = document.getElementById("chart");
+let idCard;
 
 let mainChart = new Chart(ctx,  {
   type: 'bar',
@@ -28,6 +29,7 @@ let mainChart = new Chart(ctx,  {
 async function registra(event) {
   event.preventDefault();
   const valorBttn = event.submitter.value;
+  let id = idCard;
   let categoria;
 
   const item = event.target[0].value;
@@ -39,9 +41,16 @@ async function registra(event) {
     categoria = "Despesa";
   }
 
-  const query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
-  const method = "POST";
+  let query;
+  let method;
 
+  if (id == undefined) {
+    query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
+    method = "POST";
+  } else {
+    query = `UPDATE registro_financeiro SET categoria = '${categoria}', item = '${item}', valor = ${valor} WHERE id = ${id}`;
+    method = "PUT";
+  }
   event.target[0].value = ""
   event.target[1].value = ""
   
@@ -66,7 +75,7 @@ function createSpreadSheet(objets) {
 
     const classColor = obj.categoria.toLowerCase(); 
     listCard.innerHTML += `
-    <div onclick="editar(this)" class="card">
+    <div onclick="editar(this)" ondblclick="deletar(this)" id="card_${obj.id}" class="card">
       <div class="info-card">
         <b class="tag ${classColor}" >
           ${obj.categoria}
@@ -107,6 +116,29 @@ async function updateChart() {
   mainChart.update();
 }
 
+function editar(event) {
+  const card = event;
+  const valores = card.querySelectorAll(".card > p");
+  
+  const item = valores[0].innerHTML.slice(6);
+  const valor = valores[1].innerHTML.slice(9);
+  
+  idCard = card.id.slice(5);
+  document.getElementById("item").value = item; 
+  document.getElementById("value").value = valor;
+} 
+
+async function deletar(event) {
+  const card = event;
+  const id = card.id.slice(5);
+
+  const query = `DELETE FROM registro_financeiro WHERE id = ${id}`;
+  const method = 'DELETE';
+
+  const result = await consultaBanco(query, method);  
+  obterPlanilhas();
+  updateChart()
+}
 
 obterPlanilhas();
 updateChart();
