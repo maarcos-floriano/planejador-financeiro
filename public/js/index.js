@@ -62,7 +62,7 @@ async function registra(event) {
   let query;
   let method;
 
-  if (id == undefined) {
+  if (id == null) {
     query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem(
       "id"
     )})`;
@@ -162,6 +162,7 @@ async function deletar(event) {
   const method = "DELETE";
 
   const result = await consultaBanco(query, method);
+  idCard = null;
   obterPlanilhas();
   updateChart();
   resetInactivityTimer();
