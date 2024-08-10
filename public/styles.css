@@ -3,16 +3,25 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+section {
+  background: #fff;
+
+  margin: 20px auto;
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+  border-radius: 8px;
 }
 
 .container {
   width: 80%;
   max-width: 600px;
-  margin: 20px auto;
+
   padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
@@ -44,35 +53,6 @@ input {
 
 input::-webkit-inner-spin-button {
   appearance: none
-}
-
-.suggestion {
-  display: none;
-  width: 85%;
-
-  background-color: #ddd;
-  border-radius: 4px;
-
-  position: absolute;
-  top: 35px;
-  right: -5px;
-
-  z-index: 1;
-}
-
-.suggestion p {
-  width: 97%;
-  padding: 5px;
-  margin: 5px auto;
-
-  border-radius: 4px;
-
-  transition: 0.4s ease all;
-}
-
-.suggestion p:hover {
-  background-color: #fff;
-  cursor: pointer;
 }
 
 .container-bttns {
@@ -113,14 +93,17 @@ button.expense {
 
 .areaResults {
   display: flex;
-  margin: auto;
-
-  gap: 20px;
+  align-items: center;
+  justify-content: space-around;
 
   width: 95%;
-  padding: 10px;
+  max-width: 1000px;
+  height: 50%;
+}
 
-  overflow-x: scroll;
+.list-card {
+  width: 40%;
+  height: 95%;
 }
 
 .card {
@@ -128,9 +111,9 @@ button.expense {
   justify-content: space-evenly;
   flex-flow: column;
   
-  padding: 5px 20px;
-  width: 90px;
-  height: 150px;
+  width: 100%;
+  padding: 5px 10px;
+  height: 100px;
 
   border-radius: 10px;
   background-color: #fff;
@@ -141,17 +124,29 @@ button.expense {
   margin: 0;
 }
 
-p.tag {
+b.tag {
   padding: 2px 4px;
   width: fit-content;
   border-radius: 5px;
   color: white;
 }
 
-p.receita {
-  background-color: #218837d8;
+b.receita {
+  background-color: #218837;
 }
 
-p.despesa {
+b.despesa {
   background-color: #ce2d05;
+}
+
+.info-card {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
+
+.charts {
+  width: 50%;
+  height: 95%;
+  /* background-color: #ddd; */
 }

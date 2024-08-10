@@ -1,69 +1,107 @@
-const category = document.getElementById("category");
-const suggestions = document.getElementById("suggestion");
+const ctx = document.getElementById("chart");
 
-document.getElementById('finance-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  const descricao = document.getElementById('description').value;
-  const valor = parseFloat(document.getElementById('amount').value);
-  const tipo = document.getElementById('type').value;
-
-  if (descricao === '' || isNaN(valor)) return;
-
-  const listaEntradas = document.getElementById('entries-list');
-  const li = document.createElement('li');
-  li.textContent = `${descricao} - ${tipo === 'income' ? '+' : '-'}${valor.toFixed(2)}`;
-  listaEntradas.appendChild(li);
-
-  atualizarResumo(tipo, valor);
-  limparFormulario();
+let mainChart = new Chart(ctx,  {
+  type: 'bar',
+  data: {
+    labels: [],
+      datasets: [{
+        type: 'bar',
+        label: 'Informações sobre sua receita',
+        data: [],
+        borderWidth: 1,
+        backgroundColor: [
+          '#218837',
+          '#ce2d05',
+          '#F2AB27'
+        ]
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
 });
 
-function atualizarResumo(tipo, valor) {
-  const receitaTotalElem = document.getElementById('total-income');
-  const despesaTotalElem = document.getElementById('total-expenses');
-  const saldoElem = document.getElementById('balance');
+async function registra(event) {
+  const valorBttn = event.submitter.value;
+  let categoria;
 
-  let receitaTotal = parseFloat(receitaTotalElem.textContent);
-  let despesaTotal = parseFloat(despesaTotalElem.textContent);
+  const item = event.target[0].value;
+  const valor = event.target[1].value;
 
-  if (tipo === 'income') {
-      receitaTotal += valor;
-      receitaTotalElem.textContent = receitaTotal.toFixed(2);
+  if (valorBttn == "income") {
+    categoria = "Receita";
   } else {
-      despesaTotal += valor;
-      despesaTotalElem.textContent = despesaTotal.toFixed(2);
+    categoria = "Despesa";
   }
 
-  const saldo = receitaTotal - despesaTotal;
-  saldoElem.textContent = saldo.toFixed(2);
+  const query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, 1)`;
+  const method = "POST";
+  
+  const result = await consultaBanco(query, method);  
 }
-
-function limparFormulario() {
-  document.getElementById('description').value = '';
-  document.getElementById('amount').value = '';
-}
-
 
 async function obterPlanilhas() {
-  const query = "SELECT * FROM registro_financeiro";
+  const query = "SELECT * FROM registro_financeiro ORDER BY data DESC";
   const method = "GET";
   const result = await consultaBanco(query, method);
-  console.log(result);
   createSpreadSheet(result)
 }
 
 function createSpreadSheet(objets) {
-  const areaResults = document.getElementById("areaResults");
+  const listCard = document.getElementById("listCard");
+  listCard.innerHTML = "";
 
   for (const obj of objets) {
-    console.log(obj);
+    const data = converterData(obj.data);
+
     const classColor = obj.categoria.toLowerCase(); 
-    areaResults.innerHTML += `<div onclick="editar(this)" class="card"><p class="tag ${classColor}" >${obj.categoria}</p><p>Item: ${obj.item}</p><p>Valor ${obj.valor}</p></div>`
+    listCard.innerHTML += `
+    <div onclick="editar(this)" class="card">
+      <div class="info-card">
+        <b class="tag ${classColor}" >
+          ${obj.categoria}
+        </b>
+        <p>
+          ${data}
+        </p>
+      </div>
+      <p>Item: ${obj.item}</p>
+      <p>Valor: R$${obj.valor}</p>
+    </div>`
   }
 }
 
+async function updateChart() {
+  const query = `
+    SELECT receita.total receita, despesa.total despesa, (receita.total - despesa.total) total 
+    FROM 
+      (SELECT COALESCE(SUM(valor), 0) AS total 
+      FROM registro_financeiro where categoria = "Despesa") AS despesa, 
+      (SELECT COALESCE(SUM(valor), 0) AS total 
+      FROM registro_financeiro WHERE categoria = "Receita") AS receita
+    `;
+  const method = "GET";
+  const result = await consultaBanco(query, method);
+  const labels = Object.keys(result[0]);
+  const data = Object.values(result[0]).map(val => Number.parseInt(val))
+  
+  mainChart.data.labels = labels;
+  mainChart.data.datasets[0].data = data; 
+  mainChart.update();
+}
+
+
 obterPlanilhas();
+updateChart();
+
+function converterData(data) {
+  let newData = new Date(data).toLocaleDateString();
+  return newData.slice(-7);
+}
 
 async function consultaBanco(caminho, metodo) {
   return fetch(`http://localhost:3000/connect/${caminho}`, {
