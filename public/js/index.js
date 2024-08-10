@@ -1,5 +1,5 @@
 if (!sessionStorage.getItem("id")) {
-  window.location.href = "/login";
+  window.location.href = "/index.html";
 }
 
 const TIMEOUT_DURATION = 90000; // 15 minutos
