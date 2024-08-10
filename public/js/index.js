@@ -38,10 +38,10 @@ async function registra(event) {
     categoria = "Despesa";
   }
 
-  const query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, 1)`;
+  const query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
   const method = "POST";
   
-  const result = await consultaBanco(query, method);  
+  const result = await consultaBanco(query, method);
 }
 
 async function obterPlanilhas() {
@@ -104,7 +104,7 @@ function converterData(data) {
 }
 
 async function consultaBanco(caminho, metodo) {
-  return fetch(`http://localhost:3000/connect/${caminho}`, {
+  return fetch(`/connect/${caminho}`, {
     method: `${metodo}`,
     headers: {
       "Content-Type": "application/json",

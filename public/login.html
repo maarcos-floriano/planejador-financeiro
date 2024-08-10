@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Planejador Financeiro</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
   <main>
@@ -33,3 +33,42 @@
   </main>
 </body>
 </html>
+
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const ra = document.querySelector('#ra').value;
+    const password = document.querySelector('#password').value;
+    if (ra !== '' && password !== '') {
+      consultaBanco(`select * from usuarios where ra = '${ra}' AND senha = '${password}'`, 'GET').then((resposta) => {
+        if (resposta) {
+          id = resposta[0].id;
+          sessionStorage.setItem('id', id);
+          window.location.href = '/planejador.html';
+        } else {
+          alert('Usuário ou senha inválidos');
+        }
+      });
+    } else {
+      alert('Usuário ou senha inválidos');
+    }
+  });
+
+  async function consultaBanco(caminho, metodo) {
+    return fetch(`/connect/${caminho}`, {
+      method: `${metodo}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          return resposta.json();
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+</script>

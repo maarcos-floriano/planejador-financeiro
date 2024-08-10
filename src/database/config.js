@@ -2,8 +2,8 @@ var mysql = require('mysql2');
 
 var msqlConfig = {
   host: 'localhost',
-  user: 'ze',
-  password: 'senhaDoZe',
+  user: 'aluno',
+  password: 'sptech',
   database: 'planilha_sptech'
 }
 

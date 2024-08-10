@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, "../public")))
 var connectRouter = require("./routes/connect");
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+  res.sendFile(path.join(__dirname, "../public", "login.html"));
 });
 app.use("/connect", connectRouter);
 

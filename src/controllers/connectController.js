@@ -2,6 +2,7 @@ var conexaoModel = require('../models/connectModel');
 
 function conexao(req, res){
   var query = req.params.query;
+  
   conexaoModel.conexao(query)
   .then(function(resultados){
     res.json(resultados);
