@@ -62,15 +62,10 @@ async function registra(event) {
   let query;
   let method;
 
-<<<<<<< HEAD
-  if (id == null) {
-    query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem("id")})`;
-=======
   if (id == undefined) {
     query = `INSERT INTO registro_financeiro (categoria, item, valor, fkUser) VALUES ('${categoria}', '${item}', ${valor}, ${sessionStorage.getItem(
       "id"
     )})`;
->>>>>>> 3359862c1b1006cb1ea3809b53e7302448a632dd
     method = "POST";
   } else {
     query = `UPDATE registro_financeiro SET categoria = '${categoria}', item = '${item}', valor = ${valor} WHERE id = ${id}`;
