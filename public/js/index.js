@@ -118,12 +118,14 @@ async function updateChart() {
     FROM 
       (SELECT COALESCE(SUM(valor), 0) AS total 
       FROM registro_financeiro 
-      WHERE categoria = "Despesa" 
+      WHERE categoria = 'Despesa' 
+      AND fkUser = ${sessionStorage.getItem('id')}
       AND MONTH(data) = MONTH(curdate()) 
       AND YEAR(data) = YEAR(curdate())) AS despesa, 
       (Select COALESCE(SUM(valor), 0) AS total 
       FROM registro_financeiro 
-      WHERE categoria = "Receita" 
+      WHERE categoria = 'Receita' 
+      AND fkUser = ${sessionStorage.getItem('id')}
       AND MONTH(data) = MONTH(curdate()) 
       AND YEAR(data) = YEAR(curdate())) AS receita;
     `;
