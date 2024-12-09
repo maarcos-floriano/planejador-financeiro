@@ -197,7 +197,7 @@ async function consultaBanco(caminho, metodo) {
 const initWindow = document.createElement("div");
 initWindow.id = "initWindow";
 initWindow.classList = "init-window";
-initWindow.innerHTML = `<img src="https://moodle.sptech.school/pluginfile.php/1/core_admin/logo/0x200/1692971033/sptech_principal_ciano.png" alt="SPTech - São Paulo Tech School"></img>`;
+initWindow.innerHTML = `<img src="https://moodle.sptech.school/pluginfile.php/1/core_admin/logo/0x150/1725641063/logo_telalogin.png" alt="SPTech - São Paulo Tech School"></img>`;
 document.body.appendChild(initWindow);
 
 window.onload = () => {
